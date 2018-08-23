@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- // CustomExtensions_PersistentQuote -> etc Config.XML -->
+<!-- The root node for Magento module configuration -->
+<config>
+    <!--
+        The module's node contains basic
+        information about each Magento module
+    -->
+    <modules>
+        <!--
+            This must exactly match the namespace and module's folder
+            names, with directory separators replaced by underscores
+        -->
+        <CustomExtensions_PersistentQuote>
+            <!-- The version of our module, starting at 0.0.1 -->
+            <version>0.0.1</version>
+        </CustomExtensions_PersistentQuote>
+    </modules>
+    <!-- Configure our module's behavior in the global scope -->
+    <global>
+        <!-- Defining models -->
+        <models>
+            <!--
+                Unique identifier in the model's node.
+                By convention, we put the module's name in lowercase.
+            -->
+            <customextensions_persistentquote>
+                <!--
+                    The path to our models directory, with directory
+                    separators replaced by underscores
+                -->
+                <class>CustomExtensions_PersistentQuote_Model</class>
+            </customextensions_persistentquote>
+        </models>
+        <!-- Defining an event observer -->
+        <events>
+            <!-- The code of the event we want to observe -->
+            <customer_login>
+                <!-- Defining an observer for this event -->
+                <observers>
+                    <!--
+                        Unique identifier within the
+                        catalog_product_save_after node.
+                        By convention, we write the module's
+                        name in lowercase.
+                    -->
+                    <customextensions_persistentquote>
+                        <!-- The type of class to instantiate -->
+                        <type>singleton</type>
+                        <!-- The model to be instantiated -->
+                        <class>customextensions_persistentquote/observer</class>
+                        <!-- The method of the class to be called -->
+                        <method>checkForExistingQuoteAndIfFoundAddToSession</method>
+                    </customextensions_persistentquote>
+                </observers>
+            </customer_login>
+        </events>
+    </global>
+</config>
